@@ -2,9 +2,21 @@
   <div class="comment">
     <span class="comment-author"><%= comment.user.username %></span>
     <%= comment.body %>  
-	<%= turbo_frame_tag "comment-likes" do %>
-		<%= button_to "", likes_path, 
-				params: {'comment' => comment}, class: "post-actions-like" %>
+	
+	<% if find_likes(comment).nil? %>
+	
+		<%= turbo_frame_tag "comment-likes" do %>
+			<%= button_to "", likes_path, 
+					params: {'comment' => comment}, class: "post-actions-like" %>
+		<% end %>
+	
+	<% else %>
+	
+		<%= turbo_frame_tag "comment-likes" do%>
+			<%= button_to "", likes_path, 
+				params: {'comment' => comment}, class: "post-actions-unlike", method: :delete %>
+		<% end %>
+	
 	<% end %>
   </div>
 <% end %>

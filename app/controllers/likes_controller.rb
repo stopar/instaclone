@@ -23,12 +23,12 @@ class LikesController < ApplicationController
   
   def destroy
     if params[:post]
-      @post = current_user.posts.find_by(id: params[:post])
+      @post = Post.find_by(id: params[:post])
       current_user.likes.where('likeable_type = ? AND likeable_id = ?', @post.class.to_s, @post.id).delete_all
     end
     
     if params[:comment]
-      @comment = current_user. comments.find_by(id: params[:comment])
+      @comment = Comment.find_by(id: params[:comment])
       current_user.likes.where('likeable_type = ? AND likeable_id = ?', @comment.class.to_s, @comment.id).delete_all
     end
   end
