@@ -17,7 +17,7 @@ class LikesController < ApplicationController
     end
     
     if params[:comment]
-      @comment = Comments.find_by(id: params[:comment])
+      @comment = Comment.find_by(id: params[:comment])
       @comment.likes << Like.new(user_id: current_user.id)
     end
   end
